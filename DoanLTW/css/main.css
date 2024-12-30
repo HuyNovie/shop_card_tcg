@@ -2541,3 +2541,39 @@ h2.title {
 .contact-info .social-networks ul li a:hover {
     color: #FE980F;
 }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .search_box{
+        margin: 0 auto!important;
+    }
+}
+
+/* Dành cho màn hình nhỏ hơn 768px */
+@media (max-width: 768px) {
+    .rpphone {
+        color: #ffffff;
+        margin-top: -30px!important;
+        margin-left: 40px!important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 20px;
+        background: #ff0000;
+        border-radius: 50%;
+        text-align: center;
+    }
+}
+.rpphone {
+    color: #ffffff; 
+    margin-top: 10px; 
+    margin-left: -34px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    background: #ff0000;
+    border-radius: 50%;
+    text-align: center;
+}
