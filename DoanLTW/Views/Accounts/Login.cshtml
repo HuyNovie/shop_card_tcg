@@ -1,0 +1,40 @@
+﻿@model DoanLTW.Models.UserModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh; background-color: #f8f9fa;">
+    <div style="width: 100%; max-width: 500px;">
+        <h2 class="text-center mb-4" style="padding-bottom: 50px">Login</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div style="border: 1px solid #ddd; padding: 16px; border-radius: 8px; background-color: #fff;">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName, new { @class = "form-label" })
+                    <div style="margin-bottom: 16px;">
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserPassword, "Password", new { @class = "form-label" })
+                    <div style="margin-bottom: 16px;">
+                        @Html.PasswordFor(model => model.UserPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <input type="submit" value="Login" class="btn btn-primary" />
+                    @Html.ActionLink("Click here to Signup", "Signup", null, new { @class = "btn btn-link" })
+                </div>
+            </div>
+        }
+    </div>
+</div>

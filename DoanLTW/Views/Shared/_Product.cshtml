@@ -1,0 +1,26 @@
+﻿@model IEnumerable<DoanLTW.Models.Product>
+
+<div class="features_items">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+            <a href="@Url.Action("Details", new { id = item.ProId })" class="product-link">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <img src="~/images/shop/@item.ProImage" alt="Image of @item.ProName" 
+                                 style="height:250px; width:174px; margin-top:10px" />
+                            <h2>$@item.Price</h2>
+                            <p>@item.ProName</p>
+                            <p>
+                                @Html.ActionLink("Add to cart", "OrderNow", "ShoppingCart", new { Id = item.ProId },
+                                new { @class = "btn btn-default add-to-cart" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>
+

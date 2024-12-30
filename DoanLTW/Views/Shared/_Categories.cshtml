@@ -1,0 +1,27 @@
+﻿@using DoanLTW.Models;
+@{ 
+    TCGShopDBContext dBContext = new TCGShopDBContext();
+    List<Category> Listcategories = dBContext.Categories.ToList();
+}
+<div class="left-sidebar">
+    <h2>Category</h2>
+    <div class="panel-group category-products" id="accordian">
+        <p><a href="@Url.Action("Index", "Product")" style="font-size:20px; font-weight:600;color:#0472a9!important;padding-left:10px">
+            All cards
+            </a></p>
+        @foreach (var item in Listcategories)   
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse">
+                            <span class="badge pull-right"></span>
+                            @Html.ActionLink(item.CatName, "Index", "Product", new { categoryId = item.Id }, null)
+                        </a>
+                    </h4>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

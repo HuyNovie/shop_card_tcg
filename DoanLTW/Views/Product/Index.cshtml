@@ -1,0 +1,30 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<DoanLTW.Models.Product>
+
+@{
+    ViewBag.Title = "Product Index";
+}
+<section id="advertisement">
+    <div class="container">
+        <img src="~/images/shop/advertisement.jpg" alt="advertisement" />
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                @Html.Partial("_Categories")
+            </div>
+            <div class="col-sm-9 padding-right">
+                <h2 class="title text-center">Feature Items</h2>
+                @Html.Partial("_Product")
+            </div>
+        </div>
+    </div>
+</section>
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, categoryId = Request.QueryString["categoryId"] }))
+</div>
+
+

@@ -1,0 +1,35 @@
+﻿@using DoanLTW.Models;
+
+@{
+    if (Session["Cart"] != null)
+    {
+        List<Cart> temp = (List<Cart>)Session["Cart"];
+        var count = temp.Sum(x => x.Quantity);
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="@Url.Action("Index", "ShoppingCart")" style=" font-size: 24px; padding: 6.5px 10px; border-radius: 4px;">
+                    <i class="fa fa-shopping-cart"></i>
+                </a>
+            </li>
+            <li style="color: #ffffff; margin-top: 10px; margin-left: -34px; display: flex; justify-content: center;
+            align-items: center; width: 20px; height: 20px; background: #ff0000; border-radius: 50%; text-align: center;">
+                @count
+            </li>
+        </ul>
+    }
+    else
+    {
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a href="@Url.Action("Index", "ShoppingCart")" style=" font-size: 24px; padding: 6.5px 10px; border-radius: 4px;">
+            <i class="fa fa-shopping-cart"></i>
+        </a>
+    </li>
+    <li style="color:#000000; margin-top:15px; margin-left: -25px; display:block;"> 
+        
+    </li>
+
+</ul>
+
+    }
+}
+

@@ -1,0 +1,99 @@
+﻿@using DoanLTW.Models
+
+@{
+    ViewBag.Title = "Shoppping Cart";
+}
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li class="active">Shopping Cart</li>
+            </ol>
+        </div>
+        @{
+            if (Session["Cart"] != null)
+            {
+                using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+                {
+                    <div class="table-responsive cart_info">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr class="cart_menu">
+                                    <td class="image">Item</td>
+                                    <td class="description">Name</td>
+                                    <td class="price">Price</td>
+                                    <td class="quantity">Quantity</td>
+                                    <td class="total">Total</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            @foreach (var cart in (List<Cart>)Session["Cart"])
+                            {
+                                double p = Convert.ToDouble(cart.Product.Price);
+                                int q = Convert.ToInt32(cart.Quantity);
+                                double subtotal = p * q;
+                                <tbody>
+                                    <tr>
+                                        <td class="cart_product">
+                                            <a href=""><img src="~/images/shop/@cart.Product.ProImage" alt="" style="width:96px;height:133px; "></a>
+                                        </td>
+                                        <td class="cart_description">
+                                            <h4>@cart.Product.ProName</h4>
+                                        </td>
+                                        <td class="cart_price">
+                                            $@Html.FormatValue(cart.Product.Price, "{0:C}")
+                                        </td>
+                                        <td class="cart_quantity">
+                                            <div class="cart_quantity_button">
+                                                <input class="cart_quantity_input" type="text" name="quantity" value="@cart.Quantity" autocomplete="off" size="1">
+                                                <div id="errmsg" style="color: red; display: none;"></div>
+                                            </div>
+                                        </td>
+                                        <td class="cart_total">
+                                            <p class="cart_total_price">$@Html.FormatValue(subtotal, "{0:C}")</p>
+                                        </td>
+                                        <td class="cart_delete">
+                                            <p class="cart_quantity_delete">@Html.ActionLink("Delete", "RemoveItem", "ShoppingCart", new { Id = cart.Product.ProId }, new { onclick = "return confirm('Are you sure?');" })</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                            <tr>
+                                @{
+                                    List<Cart> temp = (List<Cart>)Session["cart"];
+                                    var total = temp.Sum(x => x.Quantity * x.Product.Price);
+                                }
+                                <td colspan="3"style="font-size:16px; font-weight:600">
+                                    @Html.ActionLink("Continue to Shopping", "Index", "Product")
+                                    &nbsp; @Html.ActionLink("Empty Cart", "ClearCart", "ShoppingCart")
+                                    &nbsp; @Html.ActionLink("Check Out", "Checkout", "ShoppingCart")
+                                    &nbsp; <input type="submit" value="Update Cart" /><br />
+                                    <span id="errmsg" style="color:red"></span>
+                                </td>
+                                <td colspan="3" style="color:#0486b3; font-size:20px; font-weight:700; padding-left:200px">Total: @Html.FormatValue(total, "{0:C}")</td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+            }
+            else
+            {
+                <div style="display: flex; justify-content: center; align-items: center; padding: 180px 0px" class="companyinfo">
+                    <h2 style="">No item in your cart!</h2>
+                </div>
+            }
+        }
+    </div>
+</section> <!--/#cart_items-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".cart_quantity_input").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errmsg").html("Enter digits only!").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+</script>

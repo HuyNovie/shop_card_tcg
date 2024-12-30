@@ -1,0 +1,42 @@
+﻿@model DoanLTW.Models.Product
+@*cho phép bạn làm việc với một đối tượng Product duy nhất trong view*@
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container" style="width:75%; padding-bottom:50px">
+    <div class="breadcrumbs">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li>@Html.ActionLink("Back to Products", "Index", new { categoryId = @Model.CatId })</li>
+            <li class="active">Details</li>
+        </ol>
+    </div><!--/breadcrums-->
+    <div class="row">
+        <div class="col-sm-5">
+            <img src="~/images/shop/@Model.ProImage" class="img-thumbnail" style="width:457px;height:100%; padding: 10px 60px;" alt="Image of @Model.ProName">
+        </div>
+        <div class="col-sm-7">
+            <p class="text-ttdetail">@Model.ProName - @Model.SetName</p>
+            <p style="color:#908e8e;margin-top:-10px; padding-bottom:8px">@Model.SetName</p>
+            <p class="text-contentdl">Product Detail</p>
+            <p class="text-contentdl"><strong>Card Number : @Model.ProNumber </strong></p>
+            <p class="text-contentdl"><strong>Card Type : @Model.CardType </strong></p>
+            <p style="font-size:16px"><strong class="text-contentdl">Attack 1 : </strong>@Model.AttackPower1</p>
+            <p style="font-size:16px"><strong class="text-contentdl">Attack 2 : </strong>@Model.AttackPower2</p>
+            <p style="font-size:26px; font-weight:600;color:#0376a9; margin-bottom:50px"><strong class="text-contentdl">Price: </strong>$@Model.Price</p>
+            <p>
+                <a class="custom-btn" href="@Url.Action("OrderNow", "ShoppingCart", new { Id = Model.ProId }, null)">
+                    Add to Cart
+                </a>
+            </p>
+        </div>
+        <!--recommended_items-->
+        <div class="col-sm-12" style="margin-top:100px">
+            @Html.Partial("_Recommendedproduct")
+        </div>
+
+    </div>
+</div>
+
+

@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home | TCG-Shop</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/prettyPhoto.css" rel="stylesheet">
+    <link href="~/css/price-range.css" rel="stylesheet">
+    <link href="~/css/animate.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+    <link href="~/css/responsive.css" rel="stylesheet">
+    <link rel="shortcut icon" href="~/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+<body>
+<header id="header">
+    <!--header-->
+    <div class="header-middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 clearfix">
+                    <div class="logo pull-left">
+                        <a href="@Url.Action("Index", "Home")">
+                            <img src="~/images/home/logo.png" alt="logo" style="width:120px" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="search_box pull-right" style="padding-top:15px">
+                        <input type="text" placeholder="Search" />
+                    </div>
+                </div>
+                <div class="col-md-4 clearfix">
+                    <div class="shop-menu clearfix pull-right" style="padding-top:3px">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <ul class="nav navbar-nav">
+                                    <li>
+                                        <a href="#" style=" background-color: #059dc5; color: #ffffff !important; padding: 1px 14px; line-height: 36px; border-radius: 4px; text-decoration: none; font-size: 14px; text-transform: capitalize; ">
+                                            @User.Identity.Name
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Logout", "Accounts")" style=" background-color: #059dc5; color: #ffffff !important; padding: 1px 14px ; line-height: 36px; border-radius: 4px; text-decoration: none; font-size: 14px ">
+                                            Logout
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Checkout", "ShoppingCart")" style=" background-color: #059dc5; color: #ffffff !important; padding: 1px 6px ; line-height: 36px; border-radius: 4px; text-decoration: none; font-size: 14px ">
+                                            Checkout
+                                        </a>
+                                    </li>
+                                    <li style="margin-right: -10px">
+                                        @Html.Partial("_CartInfo")
+                                    </li>
+                                </ul>
+
+                            }
+                            else
+                            {
+                           
+                            <ul class="nav navbar-nav">
+                                <li><a href=""><i class="fa fa-user" style="font-size: 24px; padding: 6.5px 10px; border: solid 1px #8C8C88; border-radius: 4px;"></i></a></li>
+                                <li>
+                                    <a href="@Url.Action("Login", "Accounts")" style=" background-color: #059dc5; color: #ffffff !important; padding: 1px 14px ; line-height: 36px; border-radius: 4px; text-decoration: none; font-size: 14px ">
+                                        Sign in
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Checkout", "ShoppingCart")" style=" background-color: #059dc5; color: #ffffff !important; padding: 1px 6px ; line-height: 36px; border-radius: 4px; text-decoration: none; font-size: 14px ">
+                                        Checkout
+                                    </a>
+                                </li>
+                                <li style="margin-right: -10px">
+                                    @Html.Partial("_CartInfo")
+                                </li>
+                            </ul>
+
+                            }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <!--header-bottom-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    @{
+                        var isHomePage = ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home";
+                    }
+
+                    @if (isHomePage)
+                    {
+                        <div class="text-title">
+                            <marquee>TCG Shop is the specialized online shop for VietNam single cards.</marquee>
+                        </div>
+                    }
+                </div>
+                    <div class="col-sm-12">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="mainmenu pull-left">
+                            <ul class="nav navbar-nav collapse navbar-collapse">
+                                <li>
+                                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                                <li class="dropdown">
+                                    <a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="@Url.Action("Index", "Product")">Product</a></li>
+                                        <li><a href="@Url.Action("Checkout", "ShoppingCart")">Checkout</a></li>
+                                        <li><a href="@Url.Action("Index", "ShoppingCart")">Cart</a></li>
+                                        <li><a href="@Url.Action("Index", "Login")">Login</a></li>
+                                    </ul>
+                                </li>                           
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                   
+            </div>
+        </div>
+</header><!--/header-->       
+    @RenderBody()
+<footer id="footer">
+    <!--Footer-->
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div style="display: flex; justify-content: center; align-items: center;" class="companyinfo">
+                        <h2><span>TCG</span>-<span>SHOP</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-widget">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>How can we assist you?</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Contact Customer Service</a></li>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Refund and Return Policy</a></li>
+                            <li><a href="#">Responsible Disclosure</a></li>
+                            <li><a href="#">Accessibility</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>Store</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Magic</a></li>
+                            <li><a href="#">Yu-Gi-Oh!</a></li>
+                            <li><a href="#">Pokémon</a></li>
+                            <li><a href="#">One Piece</a></li>
+                            <li><a href="#">All Categories</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>Articles & Decks</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">TCGshop Unlimited</a></li>
+                            <li><a href="#">Magic Articles & Decks</a></li>
+                            <li><a href="#">Yu-Gi-Oh! Articles & Decks</a></li>
+                            <li><a href="#">Pokémon Articles & Videos</a></li>
+                            <li><a href="#">One Piece Articles & Videos</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>Sell with Us</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Sell on TCGshop</a></li>
+                            <li><a href="#">Unlock Pro</a></li>
+                            <li><a href="#">Direct by TCGshop</a></li>
+                            <li><a href="#">Price Data API</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>Shop with Us</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Sign up for TCGshop</a></li>
+                            <li><a href="#">Direct by TCGshop</a></li>
+                            <li><a href="#">Gift Cards</a></li>
+                            <li><a href="#">Collection Tracker</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>Connect With Us</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Phone</a> </li>
+                            <li><a href="#">Email: tcgshop.vn</a></li>
+                            <li><a href="#">Working at TCGshop</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p class="pull-left">All original content here is Copyright © @DateTime.Now.Year TCGshop, Inc. TCGpshop.com® is a trademark of TCGshop, Inc.</p>
+    </div>
+</footer><!--/Footer-->
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.scrollUp.min.js"></script>
+    <script src="~/js/price-range.js"></script>
+    <script src="~/js/jquery.prettyPhoto.js"></script>
+    <script src="~/js/main.js"></script>
+</body>
+</html>

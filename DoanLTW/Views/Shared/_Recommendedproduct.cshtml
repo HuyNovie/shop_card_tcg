@@ -1,0 +1,50 @@
+﻿
+<!--recommended_items-->
+<div class="recommended_items">
+    <h2 class="title text-center">Recommended Items</h2>
+    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @if (ViewBag.RecommendedProducts != null)
+            {
+                var items = ViewBag.RecommendedProducts as List<DoanLTW.Models.Product>;
+                int itemsPerSlide = 4; // Số sản phẩm mỗi slide
+                int slideCount = (int)Math.Ceiling(items.Count / (double)itemsPerSlide);
+
+                for (int slideIndex = 0; slideIndex < slideCount; slideIndex++)
+                {
+                    <div class="item @(slideIndex == 0 ? "active" : "")">
+                        <div class="row">
+                            @foreach (var item in items.Skip(slideIndex * itemsPerSlide).Take(itemsPerSlide))
+                            {
+                                <div class="col-sm-3">
+                                    <a href="@Url.Action("Details","Product", new { id = item.ProId })">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <img src="~/images/shop/@item.ProImage" alt="@item.ProName" style="height:200px; width:137px; margin-top:10px" />
+                                                    <h2>$@item.Price</h2>
+                                                    <p>@item.ProName</p>
+                                                    <a href="@Url.Action("OrderNow", "ShoppingCart", new { Id = item.ProId })"
+                                                       class="btn btn-default add-to-cart">
+                                                        <i class="fa fa-shopping-cart"></i> Add to cart
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <!-- Điều hướng carousel -->
+        <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+        </a>
+    </div>
+</div>

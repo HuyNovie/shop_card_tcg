@@ -1,0 +1,134 @@
+﻿@model IEnumerable<DoanLTW.Models.Product>
+
+@*sử dụng model là danh sách các đối tượng Product*@
+@*@model: dùng để khai báo kiểu của @Model
+@Model: đối tượng chứa dữ liệu truyền từ Controller*@
+
+@{
+    ViewBag.Title = "Home Index";
+}
+<!--slider-->
+<section id="slider">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="carouselimg">
+                                <img src="~/images/home/banner1.png" class="girl img-responsive" style="height:320px" alt="banner1" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="carouselimg">
+                                <img src="~/images/home/banner2.png" class="girl img-responsive" style="height:320px" alt="banner2" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="carouselimg">
+                                <img src="~/images/home/banner3.jpg" class="girl img-responsive" style="height:320px" alt="banner3" />
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section><!--/slider-->
+<div class="container mt-4">
+    <h3 class="title text-uppercase">Latest Sets</h3>
+    <p style="font-size:16px">New sets from your favorite games:</p>
+    <div class="row">
+        <!-- Card 1 -->
+        <div class="col-md-3">
+            <div class="card">
+                <img src="~/images/home/Foundations.jpeg" style="border-radius: 0.5rem; width:290px; height:200px" alt="Foundations">
+                <div class="card-body text-center">
+                    <h4 style="font-weight: bold;color:black!important">Foundations</h4>
+                    <p class="text-muted mb-3">Magic: The Gathering</p>
+                    <a href="@Url.Action("Index", "Product", new { categoryId = 4 })" class="btn btn-shop w-100">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="col-md-3">
+            <div class="card">
+                <img src="~/images/home/QuarterCenturyBonanza.jpeg" style="border-radius: 0.5rem; width:290px; height:200px" alt="Quarter Century Bonanza">
+                <div class="card-body text-center">
+                    <h4 style="font-weight: bold; color: black !important">Quarter Century Bonanza</h4>
+                    <p class="text-muted mb-3">YuGiOh</p>
+                    <a href="@Url.Action("Index", "Product", new { categoryId = 3 })" class="btn btn-shop w-100">Shop Now</a>
+
+                </div>
+            </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="col-md-3">
+            <div class="card">
+                <img src="~/images/home/SV08SurgingSparks.jpeg" style="border-radius: 0.5rem; width:290px; height:200px" alt="Surging Sparks">
+                <div class="card-body text-center">
+                    <h4 style="font-weight: bold; color: black !important">Scarlet & Violet</h4>
+                    <p class="text-muted mb-3">Pokemon</p>
+                    <a href="@Url.Action("Index", "Product", new { categoryId = 1 })" class="btn btn-shop w-100">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="col-md-3">
+            <div class="card">
+                <img src="~/images/home/TwoLegends.jpeg" style="border-radius: 0.5rem; width:290px; height:200px" alt="Base Set First Edition">
+                <div class="card-body text-center">
+                    <h4 style="font-weight: bold; color: black !important">TwoLegends</h4>
+                    <p class="text-muted mb-3">One Piece</p>
+                    <a href="@Url.Action("Index", "Product", new { categoryId = 2 })" class="btn btn-shop w-100">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" style="padding-bottom: 50px">
+    <div class="row">
+        <!--Best Seller-->
+        <div class="features_items">
+            <h2 class="title text-center">
+                Best seller
+            </h2>
+            @foreach (var item in ViewBag.BestSellerProducts)
+            {
+                <div class="col-sm-3">
+                    <a href="@Url.Action("Details","Product", new { id = item.ProId })">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="~/images/shop/@item.ProImage" alt="Image of @item.ProName" style="height:250px; width:174px; margin-top:10px" />
+                                    <h2>$@item.Price</h2>
+                                    <p>@item.ProName</p>
+                                    <p>
+                                        @Html.ActionLink("Add to cart", "OrderNow", "ShoppingCart", new { Id = item.ProId }, new { @class = "btn btn-default add-to-cart" })
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+        <!--recommended_items-->
+        @Html.Partial("_Recommendedproduct")
+    </div>
+</div>
+
+
+
+
+
+
